@@ -80,7 +80,7 @@ exports.updateProfileContact = (req, res) => {
     });
   };
   exports.updateProfileLatLong = (req, res) => {
-    // console.log(req.body.lat,req.body.long)
+    // console.log(req.body)
     Hawker.findOne({ _id: req.user._id }).exec((error, user) => {
       if (error) {
         return res.status(400).json({

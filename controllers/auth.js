@@ -7,7 +7,7 @@ exports.hawkerSignup=(req,res)=>{
         if(user) return res.status(400).json({
             message:"Email already registered please login"
         });
-
+        console.log(req.body.lat,req.body.long);
         const {
             name,
             email,
