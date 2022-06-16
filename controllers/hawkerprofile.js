@@ -11,6 +11,16 @@ exports.hawkerProfileInfo = (req, res) => {
   });
 };
 
+exports.getHawkersProfile =async (req, res) => {
+  // const filter = {};
+  await Hawker.find({})
+  .then(data=>
+    res.status(200).json({ok:true,data})
+  )
+  .catch(err=>{
+    res.status(400).json({ok:false,err})
+  });
+};
 
 exports.updateProfileContact = (req, res) => {
     Hawker.findOne({ _id: req.user._id }).exec((error, user) => {
