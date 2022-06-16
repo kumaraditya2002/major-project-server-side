@@ -37,11 +37,11 @@ const hawkerSchema=new mongoose.Schema({
     },
     lat:{
         type:String,
-        require:true
+    
     },
     long:{
         type:String,
-        require:true
+        
     },
     profileimage:{
         type:String
