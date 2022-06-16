@@ -49,10 +49,8 @@ exports.deleteItem=(req,res)=>{
             return res.status(400).json({message:"Something went wrong"});
         else{
             const del=req.body;
-            // console.log(del);
             let remItems=[];
             inv.items.forEach(e=>{
-                // console.log(e._id.toString())
                 if(!del.includes(e._id.toString()))
                     remItems.push(e);
             });
