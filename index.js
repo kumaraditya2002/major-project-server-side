@@ -10,7 +10,9 @@ env.config();
 const hawkerAuth=require('./routes/hawkerAuth');
 const inventory=require('./routes/inventory');
 const hawkerProfile=require('./routes/hawkerprofile')
-
+const userAuth=require('./routes/userAuth');
+const userProfile=require('./routes/userprofile');
+const hawkerReview=require('./routes/hawkerReview');
 //middleware
 app.use(bodyParser.json());
 app.use('/uploads', express.static('uploads'));
@@ -18,6 +20,9 @@ app.use(cors());
 app.use('/api',hawkerAuth);
 app.use('/api',inventory);
 app.use('/api',hawkerProfile);
+app.use('/api',userAuth);
+app.use('/api',userProfile);
+app.use('/api',hawkerReview);
 
 mongoose.connect(
     process.env.URL,

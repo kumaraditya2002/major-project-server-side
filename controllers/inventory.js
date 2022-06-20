@@ -74,4 +74,13 @@ exports.getItems=(req,res)=>{
             return res.status(200).json({ inv});
     });
 }
+exports.getHawInv=(req,res)=>{
+    Inventory.findOne({hawkerId:req.params.hawkerid})
+    .exec((err,inv)=>{
+        if(err)
+            return res.status(400).json({message:"Something went wrong"});
+        else
+            return res.status(200).json({ inv});
+    });
+}
 
