@@ -13,6 +13,8 @@ const hawkerProfile=require('./routes/hawkerprofile')
 const userAuth=require('./routes/userAuth');
 const userProfile=require('./routes/userprofile');
 const hawkerReview=require('./routes/hawkerReview');
+const userFavorites=require('./routes/userFav');
+
 //middleware
 app.use(bodyParser.json());
 app.use('/uploads', express.static('uploads'));
@@ -23,6 +25,7 @@ app.use('/api',hawkerProfile);
 app.use('/api',userAuth);
 app.use('/api',userProfile);
 app.use('/api',hawkerReview);
+app.use('/api',userFavorites);
 
 mongoose.connect(
     process.env.URL,
