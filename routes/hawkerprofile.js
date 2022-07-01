@@ -1,5 +1,5 @@
 const express=require('express');
-const {hawkerProfileInfo,getHawkersProfile, updateProfileEmail, updateProfileContact,filterByItem, updateProfileAddress,updateProfileImage,updateProfileLatLong}=require('../controllers/hawkerprofile')
+const {hawkerProfileInfo,getHawkersProfile, updateProfileEmail,sortByPrice,sortByRating, updateProfileContact,filterByItem, updateProfileAddress,updateProfileImage,updateProfileLatLong}=require('../controllers/hawkerprofile')
 const {requireSignin}=require('../middleware/auth')
 const router=express.Router();
 var multer  = require('multer');
@@ -28,8 +28,10 @@ var storage = multer.diskStorage({
  });
 
 router.get('/hawker/profile',requireSignin,hawkerProfileInfo);
-router.get('/hawker/allhawkers',getHawkersProfile);
+router.post('/hawker/allhawkers',getHawkersProfile);
 router.post('/hawker/search',filterByItem);
+router.post('/hawker/sortbyrating',sortByRating);
+router.post('/hawker/sortbyprice',sortByPrice);
 router.post('/hawker/updateemail',requireSignin,updateProfileEmail);
 router.post('/hawker/updatecontact',requireSignin,updateProfileContact);
 router.post('/hawker/updateaddr',requireSignin,updateProfileAddress);

@@ -67,6 +67,7 @@ exports.deleteItem=(req,res)=>{
 
 exports.getItems=(req,res)=>{
     Inventory.findOne({hawkerId:req.user._id})
+    .populate('hawkerId')
     .exec((err,inv)=>{
         if(err)
             return res.status(400).json({message:"Something went wrong"});
