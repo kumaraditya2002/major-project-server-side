@@ -1,5 +1,5 @@
 const express=require('express');
-const {hawkerProfileInfo,getHawkersProfile, updateProfileEmail,sortByPrice,sortByRating, updateProfileContact,filterByItem, updateProfileAddress,updateProfileImage,updateProfileLatLong}=require('../controllers/hawkerprofile')
+const {hawkerProfileInfo,getHawkersProfile, updateProfileEmail,resetPassword,sortByPrice,sortByRating, updateProfileContact,filterByItem, updateProfileAddress,updateProfileImage,updateProfileLatLong,forgotPassword}=require('../controllers/hawkerprofile')
 const {requireSignin}=require('../middleware/auth')
 const router=express.Router();
 var multer  = require('multer');
@@ -36,6 +36,8 @@ router.post('/hawker/updateemail',requireSignin,updateProfileEmail);
 router.post('/hawker/updatecontact',requireSignin,updateProfileContact);
 router.post('/hawker/updateaddr',requireSignin,updateProfileAddress);
 router.post('/hawker/updatelocation',requireSignin,updateProfileLatLong);
+router.post('/hawker/resetpassword' ,resetPassword);
+router.post('/hawker/forgotpassword' ,forgotPassword);
 router.post('/hawker/updateimage',upload.single('updateProfile'),requireSignin,updateProfileImage);
 
 module.exports=router;

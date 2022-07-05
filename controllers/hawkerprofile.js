@@ -1,7 +1,8 @@
 const Hawker = require("../models/hawker");
 const Review = require("../models/hawkerReview");
 const Inventory = require("../models/inventory");
-
+const jwt=require('jsonwebtoken')
+const bcrypt=require('bcrypt');
 
 function findDistance(lat1,lon1,lat2,lon2) {
   lat1=parseFloat(lat1);
@@ -362,3 +363,50 @@ exports.updateProfileEmail = (req, res) => {
     }
   });
 };
+
+exports.resetPassword=async (req,res)=>{
+  try{
+    const {email}=req.body;
+    // console.log(req.body)
+    const hawker=await Hawker.findOne({email});
+    // console.log(hawker)
+    if(!hawker){
+      return res.status(401).json({ok:false,err:'Email not registered'})
+    }
+    else{
+      const token=jwt.sign({_id:hawker._id},"123456",{expiresIn:'20m'});
+      
+      hawker.updateOne({resetLink:token},(err,data)=>{
+        if(err)
+          return res.status(400).json({ok:false,err:err.message});
+        else{
+          return res.status(200).json({ok:true,token});
+        }
+      })
+    }
+  }catch(err){
+    return res.status(401).json({ok:false,err:err.message})
+  }
+}
+
+exports.forgotPassword=async (req,res)=>{
+  try{
+    const resetLink=req.body.token;
+    const hawker=await Hawker.findOne({resetLink});
+    // console.log(hawker)
+    if(!hawker){
+      return res.status(401).json({ok:false,err:'Something went wrong try again'})
+    }else{
+      hawker.hash_password=bcrypt.hashSync(req.body.password,10);
+      hawker.save((err,data)=>{
+        if(err)
+          res.status(401).json({ok:false,err:err.message})
+        else{
+          res.status(200).json({ok:true,data})
+        }
+      })
+    }
+  }catch(err){
+    return res.status(401).json({ok:false,err:err.message})
+  }
+}

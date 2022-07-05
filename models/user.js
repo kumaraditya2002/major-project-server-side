@@ -20,10 +20,15 @@ const userSchema=new mongoose.Schema({
     },
     lat:{
         type:String,
-    
+        default:''
     },
     long:{
         type:String,
+        default:''
+    },
+    resetLink:{
+        data:String,
+        default:''
     }
 },{timestamps:true});
 

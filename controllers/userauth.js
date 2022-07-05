@@ -8,14 +8,14 @@ exports.userSignup=(req,res)=>{
             ok:false,
             error:"Email already registered please login"
         });
-        console.log(req.body.lat,req.body.long);
+        // console.log(req.body);
         const {
             name,
             email,
             password,
            
         } = req.body;
-        const _user=new User({name,email,password,lat,long});
+        const _user=new User({name,email,password});
 
         _user.save((error,data)=>{
             if(error){
